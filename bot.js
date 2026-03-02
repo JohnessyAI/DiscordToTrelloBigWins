@@ -335,6 +335,16 @@ client.on('ready', async () => {
     const channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_ID);
     console.log(`✓ Connected to channel: #${channel.name}`);
 
+    // Clear processed data if environment variable is set
+    if (process.env.CLEAR_PROCESSED_ON_START === 'true') {
+      console.log('⚠️  CLEAR_PROCESSED_ON_START=true - Clearing all processed data...');
+      processedMessages.clear();
+      processedUrls.clear();
+      if (fs.existsSync(PROCESSED_FILE)) fs.unlinkSync(PROCESSED_FILE);
+      if (fs.existsSync(PROCESSED_URLS_FILE)) fs.unlinkSync(PROCESSED_URLS_FILE);
+      console.log('✓ Processed data cleared');
+    }
+
     // Load processed messages and URLs
     loadProcessedMessages();
     loadProcessedUrls();
