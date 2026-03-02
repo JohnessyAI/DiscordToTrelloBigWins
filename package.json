@@ -1,0 +1,23 @@
+{
+  "name": "discord-trello-bigwins-bot",
+  "version": "1.0.0",
+  "description": "Discord bot that monitors messages for links and creates Trello cards",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node bot.js"
+  },
+  "keywords": [
+    "discord",
+    "trello",
+    "bot",
+    "automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "axios": "^1.6.5",
+    "dotenv": "^16.4.1"
+  }
+}
