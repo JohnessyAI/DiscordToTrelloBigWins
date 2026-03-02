@@ -78,18 +78,19 @@ function addProcessedUrl(url) {
 /**
  * Normalize URL to prevent duplicates
  * Examples: "https://example.com/" -> "https://example.com"
+ * NOTE: Keeps query parameters (like ?roundid=123) as they contain unique identifiers
  */
 function normalizeUrl(url) {
   try {
     let normalized = url.toLowerCase().trim();
 
-    // Remove trailing slash
-    if (normalized.endsWith('/')) {
+    // Remove trailing slash (only if there are no query parameters)
+    if (normalized.endsWith('/') && !normalized.includes('?')) {
       normalized = normalized.slice(0, -1);
     }
 
-    // Remove common tracking parameters
-    normalized = normalized.split('?')[0].split('#')[0];
+    // Remove hash fragments only (keep query parameters like ?roundid=123)
+    normalized = normalized.split('#')[0];
 
     return normalized;
   } catch (error) {
